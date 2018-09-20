@@ -51,6 +51,11 @@ async function resizeImage(image = {}, quality = 'original') {
   return ans;
 }
 
+async function resizeImageExplicit(image = {}, maxResolution = 1080, compressionQuality = 92) {
+    console.log('Warning - CameraKitGallery.resizeImageExplicit isn\'t  support on iOS yet');
+    return;
+}
+
 async function checkDevicePhotosAuthorizationStatus() {
     const isAuthorized = await CKGallery.checkDevicePhotosAuthorizationStatus();
     return isAuthorized;
@@ -70,5 +75,6 @@ export default {
   getImagesForCameraEvent,
   checkDevicePhotosAuthorizationStatus,
   requestDevicePhotosAuthorization,
-  resizeImage
+  resizeImage,
+  resizeImageExplicit,
 }
