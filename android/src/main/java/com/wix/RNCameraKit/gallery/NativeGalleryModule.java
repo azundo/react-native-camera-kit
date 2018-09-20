@@ -256,6 +256,23 @@ public class NativeGalleryModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
+    public void resizeImageExplicit(ReadableMap image, int maxResolution, int compressionQuality, Promise promise) throws IOException {
+        try {
+            String imageUrlString = getStringSafe(image, IMAGE_URI_KEY);
+            if (imageUrlString.startsWith(Utils.FILE_PREFIX)) {
+                imageUrlString = imageUrlString.replaceFirst(Utils.FILE_PREFIX, "");
+            }
+
+            WritableMap ans = Utils.resizeImage(getReactApplicationContext(), image, imageUrlString, maxResolution, compressionQuality);
+
+            promise.resolve(ans);
+        } catch (IOException e) {
+            Log.d("","Failed resize image e: "+e.getMessage());
+        }
+    }
+
+
+    @ReactMethod
     public void getImagesForUris(ReadableArray uris, Promise promise) {
         StringBuilder builder = new StringBuilder();
         builder.append(MediaStore.Images.Media.DATA + " IN (");
