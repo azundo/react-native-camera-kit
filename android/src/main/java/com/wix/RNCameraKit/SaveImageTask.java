@@ -178,12 +178,13 @@ public class SaveImageTask extends AsyncTask<byte[], Void, Void> {
         boolean hasOrientation = exifIFD0Directory.containsTag(ExifIFD0Directory.TAG_ORIENTATION);
         if (hasOrientation) {
             final int exifOrientation = exifIFD0Directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
-            convertExifOrientationToMatrix(matrix, exifOrientation);
+            boolean isFacingFront = CameraViewManager.getCameraInfo().facing == Camera.CameraInfo.CAMERA_FACING_FRONT;
+            convertExifOrientationToMatrix(matrix, exifOrientation, isFacingFront);
         }
         return matrix;
     }
 
-    private void convertExifOrientationToMatrix(Matrix matrix, int exifOrientation) {
+    private void convertExifOrientationToMatrix(Matrix matrix, int exifOrientation, boolean isCameraFacingFront) {
         switch (exifOrientation) {
             case 1:
                 break;  // top left
@@ -213,6 +214,9 @@ public class SaveImageTask extends AsyncTask<byte[], Void, Void> {
                 break;  // left bottom
             default:
                 break;  // Unknown
+        }
+        if (isCameraFacingFront) {
+            matrix.postRotate(180);
         }
     }
 
