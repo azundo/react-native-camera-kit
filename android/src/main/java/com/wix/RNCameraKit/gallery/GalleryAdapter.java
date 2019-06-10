@@ -311,7 +311,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.AbsViewH
                 null
         );
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             int dataIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
             int idIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID);
             int mimeIndex = cursor.getColumnIndex(MediaStore.Images.Media.MIME_TYPE);
@@ -335,7 +335,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.AbsViewH
             }
             index++;
         }
-        cursor.close();
+        if (cursor != null) {
+          cursor.close();
+        }
         notifyItemsLoaded(preItemsCount, getItemCount());
     }
 
