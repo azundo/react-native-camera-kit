@@ -5,8 +5,7 @@ import {
 var CKGallery = NativeModules.CKGalleryManager;
 
 async function getAlbumsWithThumbnails() {
-    const albums = await CKGallery.getAlbumsWithThumbnails();
-    return albums;
+  return await CKGallery.getAlbumsWithThumbnails();
 }
 
 async function getImageUriForId(imageId, imageQuality) {
@@ -21,8 +20,7 @@ async function getImageUriForId(imageId, imageQuality) {
 }
 
 async function getImagesForIds(imagesId = [], imageQuality) {
-  const images = await CKGallery.getImagesForIds(imagesId, imageQuality);
-  return images;
+  return await CKGallery.getImagesForIds(imagesId, imageQuality);
 }
 
 async function getImageForTapEvent(nativeEvent) {
@@ -47,8 +45,7 @@ async function resizeImage(image = {}, quality = 'original') {
     return images;
   }
 
-  const ans = await CKGallery.resizeImage(image, quality);
-  return ans;
+  return await CKGallery.resizeImage(image, quality);
 }
 
 async function resizeImageExplicit(image = {}, maxResolution = 1080, compressionQuality = 92) {
@@ -57,13 +54,11 @@ async function resizeImageExplicit(image = {}, maxResolution = 1080, compression
 }
 
 async function checkDevicePhotosAuthorizationStatus() {
-    const isAuthorized = await CKGallery.checkDevicePhotosAuthorizationStatus();
-    return isAuthorized;
+  return await CKGallery.checkDevicePhotosAuthorizationStatus();
 }
 
 async function requestDevicePhotosAuthorization() {
-  const isAuthorized = await CKGallery.requestDevicePhotosAuthorization();
-  return isAuthorized;
+  return await CKGallery.requestDevicePhotosAuthorization();
 }
 
 
