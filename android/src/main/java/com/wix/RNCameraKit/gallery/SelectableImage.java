@@ -121,7 +121,7 @@ public class SelectableImage extends FrameLayout {
             currentLoader = new Runnable() {
 
                 public Bitmap orient(final Bitmap bmp,final Integer orientation){
-                    if (orientation != 0) {
+                    if (bmp != null && orientation != 0) {
                         Matrix matrix = new Matrix();
                         matrix.postRotate(orientation);
                         return Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
